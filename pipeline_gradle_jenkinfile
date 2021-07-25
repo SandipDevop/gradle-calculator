@@ -1,0 +1,22 @@
+pipeline
+{
+   agent any
+   stages
+   {
+        stage ('scm checkout')
+        { 
+          steps {git branch: 'master', url:'https://github.com/SandipDevop/gradle-calculator'}
+        }
+        stge ('assemble and build the code')
+        {
+          steps { withGradle 
+                {
+                  sh './gradlew clean'
+                  sh './gradlew assemble'
+                  sh './gradlew build'
+                  sh './gradlew jar'
+                }
+                }
+        }
+    }
+ }    
